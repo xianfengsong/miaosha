@@ -15,15 +15,15 @@ import java.util.stream.Collectors;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MiaoshaApplicationTests {
-    @Autowired
-    private ItemMapper itemMapper;
+//    @Autowired
+//    private ItemMapper itemMapper;
 
     @Test
     public void contextLoads() {
-        ItemDOCriteria criteria=new ItemDOCriteria();
-        criteria.createCriteria().andIdIsNotNull();
-        List<ItemDO> itemDOList = itemMapper.selectByExample(criteria);
-        System.out.println(itemDOList.stream().map(ItemDO::toString).collect(Collectors.joining(",")));
+//        ItemDOCriteria criteria=new ItemDOCriteria();
+//        criteria.createCriteria().andIdIsNotNull();
+//        List<ItemDO> itemDOList = itemMapper.selectByExample(criteria);
+//        System.out.println(itemDOList.stream().map(ItemDO::toString).collect(Collectors.joining(",")));
     }
 
 }
