@@ -29,6 +29,8 @@ public class MiaoshaApplicationTests {
         itemDO.setPrice(10000);
         itemDO.setUpdateTime(new Date());
         itemMapper.insert(itemDO);
+        itemDO.setName("testX");
+        itemMapper.updateByPrimaryKey(itemDO);
     }
     @Test
     public void select() {
@@ -36,7 +38,7 @@ public class MiaoshaApplicationTests {
         criteria.createCriteria().andIdIsNotNull();
         List<ItemDO> itemDOList = itemMapper.selectByExample(criteria);
         System.out.println(
-                itemDOList.stream().map(ItemDO::toString).collect(Collectors.joining(",")));
+                itemDOList.stream().map(ItemDO::toString).collect(Collectors.joining("\r\n")));
     }
 
 }

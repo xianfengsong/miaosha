@@ -8,6 +8,7 @@
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="category" jdbcType="VARCHAR" property="category" />
     <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, amount, name, description, category, price
+    `id`, `amount`, `name`, `description`, `category`, `price`, `update_time`
   </sql>
   <select id="selectByExample" parameterType="com.throwsnew.miaosha.dao.model.ItemDOCriteria" resultMap="BaseResultMap">
     select
@@ -88,35 +89,40 @@
     select 
     <include refid="Base_Column_List" />
     from item
-    where id = #{id,jdbcType=BIGINT}
+    where `id` = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from item
-    where id = #{id,jdbcType=BIGINT}
+    where `id` = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.throwsnew.miaosha.dao.model.ItemDO" useGeneratedKeys="true">
-    insert into item (amount, name, description, 
-      category, price)
+    insert into item (`amount`, `name`, `description`, 
+      `category`, `price`, `update_time`
+      )
     values (#{amount,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{category,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER})
+      #{category,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.throwsnew.miaosha.dao.model.ItemDO" useGeneratedKeys="true">
     insert into item
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="amount != null">
-        amount,
+        `amount`,
       </if>
       <if test="name != null">
-        name,
+        `name`,
       </if>
       <if test="description != null">
-        description,
+        `description`,
       </if>
       <if test="category != null">
-        category,
+        `category`,
       </if>
       <if test="price != null">
-        price,
+        `price`,
+      </if>
+      <if test="updateTime != null">
+        `update_time`,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -135,28 +141,34 @@
       <if test="price != null">
         #{price,jdbcType=INTEGER},
       </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
   <update id="updateByExampleSelective" parameterType="map">
     update item
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
+        `id` = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.amount != null">
-        amount = #{record.amount,jdbcType=BIGINT},
+        `amount` = #{record.amount,jdbcType=BIGINT},
       </if>
       <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+        `name` = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.description != null">
-        description = #{record.description,jdbcType=VARCHAR},
+        `description` = #{record.description,jdbcType=VARCHAR},
       </if>
       <if test="record.category != null">
-        category = #{record.category,jdbcType=VARCHAR},
+        `category` = #{record.category,jdbcType=VARCHAR},
       </if>
       <if test="record.price != null">
-        price = #{record.price,jdbcType=INTEGER},
+        `price` = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null">
+        `update_time` = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -165,12 +177,13 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update item
-    set id = #{record.id,jdbcType=BIGINT},
-      amount = #{record.amount,jdbcType=BIGINT},
-      name = #{record.name,jdbcType=VARCHAR},
-      description = #{record.description,jdbcType=VARCHAR},
-      category = #{record.category,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=INTEGER}
+    set `id` = #{record.id,jdbcType=BIGINT},
+    `amount` = #{record.amount,jdbcType=BIGINT},
+    `name` = #{record.name,jdbcType=VARCHAR},
+    `description` = #{record.description,jdbcType=VARCHAR},
+    `category` = #{record.category,jdbcType=VARCHAR},
+    `price` = #{record.price,jdbcType=INTEGER},
+    `update_time` = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -179,30 +192,34 @@
     update item
     <set>
       <if test="amount != null">
-        amount = #{amount,jdbcType=BIGINT},
+        `amount` = #{amount,jdbcType=BIGINT},
       </if>
       <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+        `name` = #{name,jdbcType=VARCHAR},
       </if>
       <if test="description != null">
-        description = #{description,jdbcType=VARCHAR},
+        `description` = #{description,jdbcType=VARCHAR},
       </if>
       <if test="category != null">
-        category = #{category,jdbcType=VARCHAR},
+        `category` = #{category,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
-        price = #{price,jdbcType=INTEGER},
+        `price` = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        `update_time` = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where `id` = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.throwsnew.miaosha.dao.model.ItemDO">
     update item
-    set amount = #{amount,jdbcType=BIGINT},
-      name = #{name,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      category = #{category,jdbcType=VARCHAR},
-      price = #{price,jdbcType=INTEGER}
-    where id = #{id,jdbcType=BIGINT}
+    set `amount` = #{amount,jdbcType=BIGINT},
+      `name` = #{name,jdbcType=VARCHAR},
+      `description` = #{description,jdbcType=VARCHAR},
+      `category` = #{category,jdbcType=VARCHAR},
+      `price` = #{price,jdbcType=INTEGER},
+      `update_time` = #{updateTime,jdbcType=TIMESTAMP}
+    where `id` = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

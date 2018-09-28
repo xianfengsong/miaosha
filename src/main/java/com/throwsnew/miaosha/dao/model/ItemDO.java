@@ -1,5 +1,7 @@
 package com.throwsnew.miaosha.dao.model;
 
+import java.util.Date;
+
 public class ItemDO {
     private Long id;
 
@@ -12,6 +14,8 @@ public class ItemDO {
     private String category;
 
     private Integer price;
+
+    private Date updateTime;
 
     public Long getId() {
         return id;
@@ -59,5 +63,26 @@ public class ItemDO {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemDO{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
+                ", price=" + price +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }

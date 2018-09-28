@@ -2,10 +2,9 @@ package com.throwsnew.miaosha.dao.mapper;
 
 import com.throwsnew.miaosha.dao.model.ItemDO;
 import com.throwsnew.miaosha.dao.model.ItemDOCriteria;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public interface ItemMapper {
@@ -19,7 +18,8 @@ public interface ItemMapper {
 
     ItemDO selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") ItemDO record, @Param("example") ItemDOCriteria example);
+    int updateByExampleSelective(@Param("record") ItemDO record,
+            @Param("example") ItemDOCriteria example);
 
     int updateByExample(@Param("record") ItemDO record, @Param("example") ItemDOCriteria example);
 
