@@ -103,6 +103,21 @@
       #{category,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
+    <insert id="insertBatch" keyColumn="id" keyProperty="id" parameterType="java.util.List"
+      useGeneratedKeys="true">
+        insert into item (`amount`, `name`, `description`,
+        `category`, `price`, `update_time`
+        )
+        values
+        <foreach collection="records" index="index" item="perItem" separator=",">
+            (#{perItem.amount,jdbcType=BIGINT},
+            #{perItem.name,jdbcType=VARCHAR},
+            #{perItem.description,jdbcType=VARCHAR},
+            #{perItem.category,jdbcType=VARCHAR},
+            #{perItem.price,jdbcType=INTEGER},
+            #{perItem.updateTime,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.throwsnew.miaosha.dao.model.ItemDO" useGeneratedKeys="true">
     insert into item
     <trim prefix="(" suffix=")" suffixOverrides=",">
