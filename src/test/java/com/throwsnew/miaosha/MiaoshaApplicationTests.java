@@ -34,12 +34,13 @@ public class MiaoshaApplicationTests {
     }
 
     @Test
-    public void init() {
-        int productNumber = 200000;
+    public void init() throws InterruptedException {
+        int productNumber = 1000000;
         String[] categoryList = new String[]{"phone", "drone", "food", "keyboard", "medicine"};
-
         ForkJoinPool pool = new ForkJoinPool(32);
         List<ItemDO> itemList = new ArrayList<>();
+        Long start = System.currentTimeMillis();
+
         for (int i = 0; i < productNumber; i++) {
             double random = Math.random();
             String category = categoryList[i % categoryList.length];
@@ -52,10 +53,11 @@ public class MiaoshaApplicationTests {
             itemList.add(itemDO);
             if (itemList.size() >= 100 || i == productNumber - 1) {
                 pool.execute(new InsertItemAction(itemMapper, itemList));
+                Thread.sleep(200L);
                 itemList = new ArrayList<>();
             }
         }
-        Long start = System.currentTimeMillis();
+
         pool.awaitQuiescence(1, TimeUnit.DAYS);
         System.out.println("用时：" + (System.currentTimeMillis() - start));
     }
