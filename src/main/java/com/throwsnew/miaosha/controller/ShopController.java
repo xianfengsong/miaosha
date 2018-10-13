@@ -3,12 +3,15 @@ package com.throwsnew.miaosha.controller;
 import com.throwsnew.miaosha.model.Item;
 import com.throwsnew.miaosha.model.Order;
 import com.throwsnew.miaosha.service.ShopService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by Xianfeng
@@ -23,6 +26,7 @@ public class ShopController {
 
     @GetMapping("/items/{category}")
     public List<Item> listItem(@PathVariable String category) {
+        //todo 分页返回
         return shopService.listItemByCategory(category);
     }
 
@@ -32,11 +36,13 @@ public class ShopController {
     }
 
     @GetMapping("/myOrder/{uid}")
-    public List<Item> listOrder(@PathVariable String category) {
-        return shopService.listItemByCategory(category);
+    public List<Order> listOrder(@PathVariable String uid) {
+        return shopService.listOrderByUser(uid);
     }
 
-    //一份商品算一个订单
+    /**
+     * 下单后扣除库存-1
+     */
     @PostMapping("/order")
     public ResponseEntity order(@RequestBody Order order) {
         shopService.makeOrder(order);

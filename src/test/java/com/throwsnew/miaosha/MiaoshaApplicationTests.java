@@ -6,6 +6,7 @@ import com.throwsnew.miaosha.dao.model.ItemDOCriteria;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -21,6 +22,14 @@ public class MiaoshaApplicationTests {
 
     @Autowired
     private ItemMapper itemMapper;
+
+    @Test
+    public void random() {
+        int min = 751305;
+        int max = 1751304;
+        Random random = new Random();
+        int span = random.nextInt(max - min + 1);
+    }
 
     public static String randomAlphaNumeric(int count) {
         final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
